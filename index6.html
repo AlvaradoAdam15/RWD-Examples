@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <style>
+        .container{
+            display: flex;
+            display: -webkit-flex;
+            flex-flow: row wrap;
+            -webkit-flex-flow: row wrap;
+        }
+        
+        .columna1 {
+            background: red;
+            position: absolute;
+            width: 250px;
+            height: 100vh;
+            -webkit-transition:  -webkit-transform 0.3s ease-out;
+            -moz-transition: -moz-transform 0.3s ease-out;
+            -ms-transition:  -ms-transform 0.3s ease-out;
+            -o-transition: -o-transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+            z-index: 1;
+        }
+
+        .columna2 {
+            background: deepskyblue;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+        }
+
+        .columna1.open{
+            -webkit-transform: translate(0,0);
+            -moz-transform: translate(0,0);
+            -ms-transform: translate(0,0);
+            -o-transform: translate(0,0);
+            transform: translate(0,0);
+        }
+
+        .columna1{
+            -webkit-transform: translate(-250px,0);
+            -moz-transform: translate(-250px,0);
+            -ms-transform: translate(-250px,0);
+            -o-transform: translate(-250px,0);
+            transform: translate(-250px,0);
+        }
+
+        @media (min-width: 600px) {
+
+        }
+
+        @media (min-width: 800px) {
+
+        }
+
+    </style>
+
+    <title>Off canvas</title>
+</head>
+<body>
+
+<div class="container">
+    <section id="sidePanel" class="columna1">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur eveniet odio quaerat! Animi aperiam at exercitationem fugit in officia placeat, reiciendis rerum suscipit! Consequatur debitis et nisi reiciendis reprehenderit saepe!
+        <br />
+        <ul>
+            <li>Lorem ipsum.</li>
+            <li>Aliquam, officiis.</li>
+            <li>Delectus, esse!</li>
+            <li>Odio, tempora?</li>
+            <li>Iste, nihil?</li>
+        </ul>
+    </section>
+    
+    <section id="mainPanel" class="columna2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, harum, libero. Amet autem, debitis doloremque ducimus eligendi hic laboriosam, minus mollitia natus obcaecati odio officiis omnis quaerat ratione repudiandae voluptates.</section>
+
+</div>
+
+<!--Jquery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<!-- Hammer js -->
+<script src="http://hammerjs.github.io/dist/hammer.min.js"></script>
+<script>
+    (function(){
+        var sidePanel = document.getElementById('sidePanel');
+        var mainPanel = document.getElementById('mainPanel');
+        var hammerPanel = new Hammer(mainPanel);
+
+        hammerPanel
+                .on('swiperight', function(e){
+                    sidePanel.classList.toggle('open');
+                })
+                .on('swipeleft', function(e){
+                    sidePanel.classList.toggle('open');
+                });
+    }());
+</script>
+
+</body>
+</html>
