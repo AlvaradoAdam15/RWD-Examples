@@ -57,6 +57,42 @@
 
         }
 
+        #sidebar-toggle {
+            background: #eac109;
+            border-radius: 3px;
+            display: block;
+            position: relative;
+            padding: 10px 7px;
+            float: left;
+            -webkit-transition:  -webkit-transform 0.3s ease-out;
+            -moz-transition: -moz-transform 0.3s ease-out;
+            -ms-transition:  -ms-transform 0.3s ease-out;
+            -o-transition: -o-transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+            z-index: 1;
+        }
+
+        #sidebar-toggle .bar{
+            display: block;
+            width: 18px;
+            margin-bottom: 3px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 1px;
+        }
+
+        #sidebar-toggle .bar:last-child{
+            margin-bottom: 0;
+        }
+
+        #sidebar-toggle.open {
+            -webkit-transform: translate(250px,0);
+            -moz-transform: translate(250px,0);
+            -ms-transform: translate(250px,0);
+            -o-transform: translate(250px,0);
+            transform: translate(250px,0);
+        }
+
     </style>
 
     <title>Off canvas</title>
@@ -65,8 +101,6 @@
 
 <div class="container">
     <section id="sidePanel" class="columna1">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur eveniet odio quaerat! Animi aperiam at exercitationem fugit in officia placeat, reiciendis rerum suscipit! Consequatur debitis et nisi reiciendis reprehenderit saepe!
-        <br />
         <ul>
             <li>Lorem ipsum.</li>
             <li>Aliquam, officiis.</li>
@@ -76,7 +110,15 @@
         </ul>
     </section>
     
-    <section id="mainPanel" class="columna2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, harum, libero. Amet autem, debitis doloremque ducimus eligendi hic laboriosam, minus mollitia natus obcaecati odio officiis omnis quaerat ratione repudiandae voluptates.</section>
+    <section id="mainPanel" class="columna2">
+        <a href="#" id="sidebar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar">  </span>
+        </a><br /><br />
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, harum, libero. Amet autem,
+        debitis doloremque ducimus eligendi hic laboriosam, minus mollitia natus obcaecati odio officiis
+        omnis quaerat ratione repudiandae voluptates.</section>
 
 </div>
 
@@ -89,7 +131,10 @@
     (function(){
         var sidePanel = document.getElementById('sidePanel');
         var mainPanel = document.getElementById('mainPanel');
+        var sidebarToggle = document.getElementById('sidebar-toggle');
         var hammerPanel = new Hammer(mainPanel);
+        var hammerToggle = new Hammer.Manager(sidebarToggle);
+        hammerToggle.add( new Hammer.Tap({ event: 'singletap' }) );
 
         hammerPanel
                 .on('swiperight', function(e){
@@ -98,6 +143,12 @@
                 .on('swipeleft', function(e){
                     sidePanel.classList.toggle('open');
                 });
+
+        hammerToggle.on("singletap", function(ev) {
+            sidePanel.classList.toggle('open');
+            sidebarToggle.classList.toggle('open');
+        });
+
     }());
 </script>
 
